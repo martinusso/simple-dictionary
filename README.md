@@ -1,4 +1,4 @@
 SimpleDictionary
 ================
 
-Trying to live without generics in Delphi
+Using dictionary in Delphi without generics.
