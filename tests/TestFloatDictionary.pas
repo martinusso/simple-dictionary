@@ -24,6 +24,9 @@ type
 
 implementation
 
+uses
+  Math, Types;
+
 procedure TestTFloatDictionary.SetUp;
 begin
   FFloatDictionary := TFloatDictionary.Create();
@@ -37,8 +40,8 @@ end;
 
 procedure TestTFloatDictionary.TestClear;
 begin
-  FFloatDictionary.Add(1, 10);
-  FFloatDictionary.Add(2, 20);
+  FFloatDictionary.Add(1, 10.123);
+  FFloatDictionary.Add(2, 45.6789);
   CheckEquals(2, FFloatDictionary.Count);
   FFloatDictionary.Clear;
   CheckEquals(0, FFloatDictionary.Count);
@@ -48,13 +51,13 @@ procedure TestTFloatDictionary.TestAdd;
 var
   Index: Integer;
 begin
-  Index := FFloatDictionary.Add(1, 10);
+  Index := FFloatDictionary.Add(1, 10.123);
   CheckEquals(0, Index, 'Should return 0');
-  Index := FFloatDictionary.Add(2, 20);
+  Index := FFloatDictionary.Add(2, 20.45);
   CheckEquals(1, Index, 'Should return 1');
-  Index := FFloatDictionary.Add(1, 11);
+  Index := FFloatDictionary.Add(1, 11.67);
   CheckEquals(0, Index, 'Should return 0');
-  Index := FFloatDictionary.Add(3, 30);
+  Index := FFloatDictionary.Add(3, 30.89);
   CheckEquals(2, Index, 'Should return 2');
 end;
 
@@ -129,14 +132,16 @@ begin
 end;
 
 procedure TestTFloatDictionary.TestValues;
+var
+  Value: Extended;
 begin
+  Value := 1.23;
+  FFloatDictionary.Append(0, Value);
+  CheckTrue(CompareValue(Value, FFloatDictionary.Values[0]) = EqualsValue);
 
-  FFloatDictionary.Append(0, 0);
-  CheckEquals(1, FFloatDictionary.Count, 'Should return 1');
-
-  FFloatDictionary.Append(0, 0);
-  CheckEquals(1, FFloatDictionary.Count, 'Should return 1');
-
+  Value := 4.56789;
+  FFloatDictionary.Add(1, Value);
+  CheckTrue(CompareValue(Value, FFloatDictionary.Values[1]) = EqualsValue);
 end;
 
 initialization

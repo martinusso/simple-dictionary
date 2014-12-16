@@ -1,11 +1,12 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{eaa026b5-dfbb-416f-acbc-ea7778c817db}</ProjectGuid>
     <MainSource>SimpleDictionaryTest.dpr</MainSource>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-    <DCC_DependencyCheckOutputName>SimpleDictionaryTest.exe</DCC_DependencyCheckOutputName>
+    <DCC_DependencyCheckOutputName>bin\SimpleDictionaryTest.exe</DCC_DependencyCheckOutputName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Version>7.0</Version>
@@ -17,6 +18,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Version>7.0</Version>
     <DCC_Define>DEBUG;_CONSOLE_TESTRUNNER</DCC_Define>
+    <DCC_ExeOutput>bin</DCC_ExeOutput>
+    <DCC_DcuOutput>dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>dcu</DCC_ObjOutput>
+    <DCC_HppOutput>dcu</DCC_HppOutput>
+    <DCC_BplOutput>bin</DCC_BplOutput>
   </PropertyGroup>
   <ProjectExtensions>
     <Borland.Personality>Delphi.Personality</Borland.Personality>
@@ -31,5 +37,7 @@
     </DelphiCompile>
     <DCCReference Include="..\src\SimpleDictionary.pas" />
     <DCCReference Include="TestFloatDictionary.pas" />
+    <DCCReference Include="TestSimpleDictionary.pas" />
+    <DCCReference Include="TestSimpleObjectDictionary.pas" />
   </ItemGroup>
 </Project>

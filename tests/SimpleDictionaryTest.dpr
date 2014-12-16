@@ -10,7 +10,9 @@ uses
   GUITestRunner,
   TextTestRunner,
   TestFloatDictionary in 'TestFloatDictionary.pas',
-  SimpleDictionary in '..\src\SimpleDictionary.pas';
+  SimpleDictionary in '..\src\SimpleDictionary.pas',
+  TestSimpleDictionary in 'TestSimpleDictionary.pas',
+  TestSimpleObjectDictionary in 'TestSimpleObjectDictionary.pas';
 
 {$R *.RES}
 
