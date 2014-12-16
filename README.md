@@ -25,3 +25,10 @@ finally
   Dictionary.Free();
 end;
 ```
+
+# License
+
+This software is open source, licensed under the The MIT License (MIT). See [LICENSE.txt](https://github.com/martinusso/simple-dictionary/blob/master/LICENSE.txt) for details.
+
+
+
