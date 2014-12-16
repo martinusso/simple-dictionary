@@ -1,4 +1,4 @@
-# SimpleDictionary
+# TSimpleDictionary
 
 Using dictionary in Delphi without generics.
 
