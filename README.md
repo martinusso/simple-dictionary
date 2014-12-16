@@ -9,7 +9,7 @@ Just add the unit "src/SimpleDictionary.pas" to project.
 
 ### Example
 
-Simple Delphi data types:
+Working with simple data types:
 
 ```delphi
 Dictionary := TSimpleDictionary.Create();
@@ -29,7 +29,7 @@ finally
 end;
 ```
 
-Objects:
+Working with objects:
 ```delphi
 Dictionary := TSimpleObjectDictionary.Create();
 // It can also be used: Dictionary := TObjectDictionary.Create();
