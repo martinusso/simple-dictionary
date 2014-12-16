@@ -9,8 +9,11 @@ Just add the unit "src/SimpleDictionary.pas" to project.
 
 ### Example
 
+Simple Delphi data types:
+
 ```delphi
 Dictionary := TSimpleDictionary.Create();
+// It can also be used: Dictionary := TDictionary.Create();
 try
 
   // adding value
@@ -20,6 +23,25 @@ try
 
   // getting value
   Value := Dictionary.Values[0];
+
+finally
+  Dictionary.Free();
+end;
+```
+
+Objects:
+```delphi
+Dictionary := TSimpleObjectDictionary.Create();
+// It can also be used: Dictionary := TObjectDictionary.Create();
+try
+
+  // adding value
+  Dictionary.Add(0, TObject1.Create());
+  // adding value in another way
+  Dictionary.Values[1] := TObject2.Create();
+
+  // getting value
+  Obj := (Dictionary.Values[0] as TObjectTest);
 
 finally
   Dictionary.Free();
