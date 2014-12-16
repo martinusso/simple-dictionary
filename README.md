@@ -10,18 +10,18 @@ Just add the unit "SimpleDictionary.pas" to project.
 ## Example
 
 ```delphi
-    Dictionary := TSimpleDictionary.Create();
-    try
-      
-      // adding value
-      Dictionary.Add(0, 'Simple');
-      // adding value in another way
-      Dictionary.Values[1] := 'Dictionary';
-      
-      // getting value
-      Value := Dictionary.Values[0];
-      
-    finally
-      Dictionary.Free();
-    end;
+Dictionary := TSimpleDictionary.Create();
+try
+
+  // adding value
+  Dictionary.Add(0, 'Simple');
+  // adding value in another way
+  Dictionary.Values[1] := 'Dictionary';
+
+  // getting value
+  Value := Dictionary.Values[0];
+
+finally
+  Dictionary.Free();
+end;
 ```
