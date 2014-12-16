@@ -7,7 +7,7 @@ Using dictionary in Delphi without generics.
 Just add the unit "SimpleDictionary.pas" to project.
   - ``Project -> Add to Project`` and then locate and choose the file.
 
-## Example
+### Example
 
 ```delphi
 Dictionary := TSimpleDictionary.Create();
@@ -26,7 +26,7 @@ finally
 end;
 ```
 
-# License
+## License
 
 This software is open source, licensed under the The MIT License (MIT). See [LICENSE.txt](https://github.com/martinusso/simple-dictionary/blob/master/LICENSE.txt) for details.
 
