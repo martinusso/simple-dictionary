@@ -6,15 +6,20 @@ uses
   Classes, Variants;
 
 type
-  ISimpleDictionary = interface
-  ['{63599D0E-F18C-42A3-930B-5788155C4671}']
-  end;
-
   TVariantRecord = record
     Key: Variant;
     Value: Variant;
   end;
   TVariantArray = array of TVariantRecord;
+
+  ISimpleDictionary = interface
+    ['{63599D0E-F18C-42A3-930B-5788155C4671}']
+
+    procedure Clear();
+    procedure Delete(const Index: Integer); overload;
+    procedure Delete(const Key: Variant); overload;
+    function IndexOf(const Key: Variant): Integer;
+  end;
 
   TSimpleDictionary = class(TInterfacedObject, ISimpleDictionary)
   private
