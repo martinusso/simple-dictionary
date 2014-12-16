@@ -19,7 +19,7 @@ Just add the unit "SimpleDictionary.pas" to project.
       Dictionary.Values[1] := 'Dictionary';
       
       // getting value
-      value := Dictionary.Values[0];
+      Value := Dictionary.Values[0];
       
     finally
       Dictionary.Free();
