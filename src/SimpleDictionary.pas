@@ -6,20 +6,20 @@ uses
   Classes, Variants;
 
 type
-  TVariantRecord = record
-    Key: Variant;
-    Value: Variant;
-  end;
-  TVariantArray = array of TVariantRecord;
-
   ISimpleDictionary = interface
     ['{63599D0E-F18C-42A3-930B-5788155C4671}']
-
     procedure Clear();
     procedure Delete(const Index: Integer); overload;
     procedure Delete(const Key: Variant); overload;
     function IndexOf(const Key: Variant): Integer;
   end;
+
+
+  TVariantRecord = record
+    Key: Variant;
+    Value: Variant;
+  end;
+  TVariantArray = array of TVariantRecord;
 
   TSimpleDictionary = class(TInterfacedObject, ISimpleDictionary)
   private
@@ -47,7 +47,7 @@ type
   TDictionary = class(TSimpleDictionary);
   TFloatDictionary = class(TSimpleDictionary);
 
-  // ObjectDictionary
+  
   TObjectRecord = record
     Key: Variant;
     Value: TObject;
