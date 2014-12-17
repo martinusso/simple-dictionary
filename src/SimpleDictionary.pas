@@ -1,3 +1,13 @@
+{*******************************************************}
+{                                                       }
+{                   TSimpleDictionary                   }
+{    https://github.com/martinusso/simple-dictionary    }
+{                                                       }
+{             This software is open source,             }
+{       licensed under the The MIT License (MIT).       }
+{                                                       }
+{*******************************************************}
+
 unit SimpleDictionary;
 
 interface
