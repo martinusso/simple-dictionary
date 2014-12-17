@@ -24,7 +24,6 @@ type
     procedure TestValues;
     procedure TestInvalidIndex;
     procedure TestInvalidKey;
-    procedure TestStress;
   end;
 
 implementation
@@ -89,22 +88,22 @@ var
   Index: Integer;
 begin
   Index := FSimpleDictionary.Add(1, 10);
-  CheckEquals(0, Index, 'Should return 0');
+  CheckEquals(0, Index);
 
   Index := FSimpleDictionary.Add(2, 20);
-  CheckEquals(1, Index, 'Should return 1');
+  CheckEquals(1, Index);
 
   FSimpleDictionary.Delete(Index);
-  CheckEquals(1, FSimpleDictionary.Count, 'Should return 1');
+  CheckEquals(1, FSimpleDictionary.Count);
 
   Index := FSimpleDictionary.Add(2, 20);
-  CheckEquals(1, Index, 'Should return 0');
+  CheckEquals(1, Index);
 
   Index := FSimpleDictionary.Add(3, 30);
-  CheckEquals(2, Index, 'Should return 2');
+  CheckEquals(2, Index);
 
   Index := FSimpleDictionary.Add(4, 'Simple Dictionary');
-  CheckEquals(3, Index, 'Should return 2');
+  CheckEquals(3, Index);
 
   FSimpleDictionary.Delete(2);
   CheckEquals(3, FSimpleDictionary.Count, 'Should return 3');
@@ -144,14 +143,6 @@ end;
 procedure TestTSimpleDictionary.TestInvalidKey;
 begin
   CheckException(UsesInvalidKey, EListError, 'should throw exception');
-end;
-
-procedure TestTSimpleDictionary.TestStress;
-var
-  I: Integer;
-begin
-  for I := 0 to 10000 do
-    FSimpleDictionary.Add(I, I * 1.23456);
 end;
 
 procedure TestTSimpleDictionary.TestValues;
