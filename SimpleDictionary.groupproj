@@ -1,0 +1,40 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{1fe7d439-9ffd-4219-89d0-4dbb1c6b2a80}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="SimpleDictionaryTest">
+    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="" />
+  </Target>
+  <Target Name="SimpleDictionaryTest:Clean">
+    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SimpleDictionaryTest:Make">
+    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="Make" />
+  </Target>
+  <Target Name="StressTest">
+    <MSBuild Projects="tests\Playground\StressTest.dproj" Targets="" />
+  </Target>
+  <Target Name="StressTest:Clean">
+    <MSBuild Projects="tests\Playground\StressTest.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="StressTest:Make">
+    <MSBuild Projects="tests\Playground\StressTest.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="SimpleDictionaryTest;StressTest" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="SimpleDictionaryTest:Clean;StressTest:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="SimpleDictionaryTest:Make;StressTest:Make" />
+  </Target>
+</Project>

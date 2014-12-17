@@ -24,6 +24,7 @@ type
     procedure TestValues;
     procedure TestInvalidIndex;
     procedure TestInvalidKey;
+    procedure TestStress;
   end;
 
 implementation
@@ -143,6 +144,14 @@ end;
 procedure TestTSimpleDictionary.TestInvalidKey;
 begin
   CheckException(UsesInvalidKey, EListError, 'should throw exception');
+end;
+
+procedure TestTSimpleDictionary.TestStress;
+var
+  I: Integer;
+begin
+  for I := 0 to 10000 do
+    FSimpleDictionary.Add(I, I * 1.23456);
 end;
 
 procedure TestTSimpleDictionary.TestValues;
