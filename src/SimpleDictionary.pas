@@ -8,10 +8,19 @@ uses
 type
   ISimpleDictionary = interface
     ['{63599D0E-F18C-42A3-930B-5788155C4671}']
-    procedure Clear();
-    procedure Delete(const Index: Integer); overload;
-    procedure Delete(const Key: Variant); overload;
-    function IndexOf(const Key: Variant): Integer;
+  end;
+
+  TSimpleDictionaryBase = class(TInterfacedObject, ISimpleDictionary)
+  private
+    constructor Create; virtual; abstract;
+    procedure Error(const Msg: string; Data: Integer);
+  protected
+    procedure Clear(); virtual; abstract;
+    procedure Delete(const Index: Integer); overload; virtual; abstract;
+    procedure Delete(const Key: Variant); overload; virtual; abstract;
+    function IndexOf(const Key: Variant): Integer; virtual; abstract;
+  public
+    destructor Destroy(); override;
   end;
 
 
@@ -21,7 +30,7 @@ type
   end;
   TVariantArray = array of TVariantRecord;
 
-  TSimpleDictionary = class(TInterfacedObject, ISimpleDictionary)
+  TSimpleDictionary = class(TSimpleDictionaryBase)
   private
     FItems: TVariantArray;
     function GetCount: Integer;
@@ -29,15 +38,14 @@ type
     procedure SetValue(const Key: Variant; const Value: Variant);
     function GetKey(const Index: Integer): Variant;
   public
-    constructor Create();
-    destructor Destroy(); override;
-    procedure Clear();
+    constructor Create(); override;
+    procedure Clear(); override;
     function Add(const Key: Variant; const Value: Variant): Integer;
     procedure Append(const Key: Variant; const Value: Variant);
-    procedure Delete(const Index: Integer); overload;
-    procedure Delete(const Key: Variant); overload;
+    procedure Delete(const Index: Integer); overload; override;
+    procedure Delete(const Key: Variant); overload; override;
 
-    function IndexOf(const Key: Variant): Integer;
+    function IndexOf(const Key: Variant): Integer; override;
     property Items: TVariantArray read FItems;
     property Count: Integer read GetCount;
     property Keys[const Index: Integer]: Variant read GetKey;
@@ -54,7 +62,7 @@ type
   end;
   TObjectArray = array of TObjectRecord;
 
-  TSimpleObjectDictionary = class(TInterfacedObject, ISimpleDictionary)
+  TSimpleObjectDictionary = class(TSimpleDictionaryBase)
   private
     FItems: TObjectArray;
     function GetCount: Integer;
@@ -62,15 +70,14 @@ type
     procedure SetValue(const Key: Variant; const Value: TObject);
     function GetKey(const Index: Integer): Variant;
   public
-    constructor Create();
-    destructor Destroy(); override;
-    procedure Clear();
+    constructor Create(); override;
+    procedure Clear(); override;
     function Add(const Key: Variant; const Value: TObject): Integer;
     procedure Append(const Key: Variant; const Value: TObject);
-    procedure Delete(const Index: Integer); overload;
-    procedure Delete(const Key: Variant); overload;
+    procedure Delete(const Index: Integer); overload; override;
+    procedure Delete(const Key: Variant); overload; override;
 
-    function IndexOf(const Key: Variant): Integer;
+    function IndexOf(const Key: Variant): Integer; override;
     function Contains(const Key: Variant): Boolean;
     property Items: TObjectArray read FItems;
     property Count: Integer read GetCount;
@@ -81,6 +88,9 @@ type
   TObjectDictionary = class(TSimpleObjectDictionary);
 
 implementation
+
+const
+  LIST_INDEX_ERROR = 'List index out of bounds (%d)';
 
 { TSimpleDictionary }
 
@@ -153,12 +163,6 @@ begin
   SetLength(FItems, Size - 1);
 end;
 
-destructor TSimpleDictionary.Destroy;
-begin
-  Self.Clear();
-  inherited;
-end;
-
 function TSimpleDictionary.GetCount: Integer;
 begin
   Result := Length(FItems);
@@ -166,6 +170,9 @@ end;
 
 function TSimpleDictionary.GetKey(const Index: Integer): Variant;
 begin
+  if (Index < 0) or (Index >= Self.GetCount) then
+    Error(LIST_INDEX_ERROR, Index);
+
   Result := FItems[Index].Key;
 end;
 
@@ -174,6 +181,10 @@ var
   Index: Integer;
 begin
   Index := Self.IndexOf(Key);
+
+  if (Index < 0) or (Index >= Self.GetCount) then
+    Error(LIST_INDEX_ERROR, Index);
+
   Result := FItems[Index].Value;
 end;
 
@@ -262,6 +273,7 @@ var
 begin
   if Index > High(FItems) then Exit;
   if Index < Low(FItems) then Exit;
+
   if Index = High(FItems) then
   begin
     SetLength(FItems, Length(FItems) - 1);
@@ -276,12 +288,6 @@ begin
   SetLength(FItems, Size - 1);
 end;
 
-destructor TSimpleObjectDictionary.Destroy;
-begin
-  Self.Clear();
-  inherited;
-end;
-
 function TSimpleObjectDictionary.GetCount: Integer;
 begin
   Result := Length(FItems);
@@ -289,6 +295,9 @@ end;
 
 function TSimpleObjectDictionary.GetKey(const Index: Integer): Variant;
 begin
+  if (Index < 0) or (Index >= Self.GetCount) then
+    Error(LIST_INDEX_ERROR, Index);
+
   Result := FItems[Index].Key;
 end;
 
@@ -297,6 +306,10 @@ var
   Index: Integer;
 begin
   Index := Self.IndexOf(Key);
+
+  if (Index < 0) or (Index >= Self.GetCount) then
+    Error(LIST_INDEX_ERROR, Index);
+
   Result := FItems[Index].Value;
 end;
 
@@ -323,6 +336,25 @@ end;
 procedure TSimpleObjectDictionary.SetValue(const Key: Variant; const Value: TObject);
 begin
   Self.Append(Key, Value);
+end;
+
+{ TSimpleDictionaryBase }
+
+destructor TSimpleDictionaryBase.Destroy;
+begin
+  Self.Clear();
+  inherited;
+end;
+
+procedure TSimpleDictionaryBase.Error(const Msg: string; Data: Integer);
+
+  function ReturnAddr: Pointer;
+  asm
+          MOV     EAX,[EBP+4]
+  end;
+
+begin
+  raise EListError.CreateFmt(Msg, [Data]) at ReturnAddr;
 end;
 
 end.
