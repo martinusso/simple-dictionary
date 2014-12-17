@@ -15,6 +15,8 @@ type
   TestTSimpleObjectDictionary = class(TTestCase)
   strict private
     FObjectDictionary: TObjectDictionary;
+    procedure UsesInvalidIndex;
+    procedure UsesInvalidKey;
     function GetObjectTest(Id: Integer = 0; const Name: string = 'Simple Dictionary'): TObjectTest;
   public
     procedure SetUp; override;
@@ -27,6 +29,8 @@ type
     procedure TestDelete1;
     procedure TestIndexOf;
     procedure TestValues;
+    procedure TestInvalidIndex;
+    procedure TestInvalidKey;
   end;
 
 implementation
@@ -151,6 +155,16 @@ begin
   CheckEquals(3, FObjectDictionary.IndexOf(3), 'Should return 3');
 end;
 
+procedure TestTSimpleObjectDictionary.TestInvalidIndex;
+begin
+  CheckException(UsesInvalidIndex, EListError, 'should throw exception');
+end;
+
+procedure TestTSimpleObjectDictionary.TestInvalidKey;
+begin
+  CheckException(UsesInvalidKey, EListError, 'should throw exception');
+end;
+
 procedure TestTSimpleObjectDictionary.TestValues;
 var
   Obj1, Obj2, Obj3: TObjectTest;
@@ -174,6 +188,18 @@ begin
   Return3 := (FObjectDictionary.Values[0] as TObjectTest);
   CheckEquals(Obj3.Id, Return3.Id);
   CheckEquals(Obj3.Name, Return3.Name);
+end;
+
+procedure TestTSimpleObjectDictionary.UsesInvalidIndex;
+begin
+  FObjectDictionary.Append(0, nil);
+  FObjectDictionary.Keys[1];
+end;
+
+procedure TestTSimpleObjectDictionary.UsesInvalidKey;
+begin
+  FObjectDictionary.Append(0, nil);
+  FObjectDictionary.Values[1];
 end;
 
 initialization

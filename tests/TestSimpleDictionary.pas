@@ -9,6 +9,8 @@ type
   TestTSimpleDictionary = class(TTestCase)
   strict private
     FSimpleDictionary: TSimpleDictionary;
+    procedure UsesInvalidIndex;
+    procedure UsesInvalidKey;
   public
     procedure SetUp; override;
     procedure TearDown; override;
@@ -20,6 +22,8 @@ type
     procedure TestDelete1;
     procedure TestIndexOf;
     procedure TestValues;
+    procedure TestInvalidIndex;
+    procedure TestInvalidKey;
   end;
 
 implementation
@@ -131,6 +135,16 @@ begin
   CheckEquals(3, FSimpleDictionary.IndexOf(3), 'Should return 3');
 end;
 
+procedure TestTSimpleDictionary.TestInvalidIndex;
+begin
+  CheckException(UsesInvalidIndex, EListError, 'should throw exception');
+end;
+
+procedure TestTSimpleDictionary.TestInvalidKey;
+begin
+  CheckException(UsesInvalidKey, EListError, 'should throw exception');
+end;
+
 procedure TestTSimpleDictionary.TestValues;
 begin
   FSimpleDictionary.Append(0, 1.23);
@@ -144,6 +158,21 @@ begin
 
   FSimpleDictionary.Add(3, False);
   CheckEquals(False, FSimpleDictionary.Values[3]);
+end;
+
+
+procedure TestTSimpleDictionary.UsesInvalidIndex;
+begin
+  FSimpleDictionary.Append(0, 1);
+
+  FSimpleDictionary.Keys[1];
+end;
+
+procedure TestTSimpleDictionary.UsesInvalidKey;
+begin
+  FSimpleDictionary.Append(0, 1);
+
+  FSimpleDictionary.Values[1];
 end;
 
 initialization
