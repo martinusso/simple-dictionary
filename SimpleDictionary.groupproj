@@ -8,17 +8,8 @@
     <Borland.Personality>Default.Personality</Borland.Personality>
     <Borland.ProjectType />
     <BorlandProject>
-  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
   </ProjectExtensions>
-  <Target Name="SimpleDictionaryTest">
-    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="" />
-  </Target>
-  <Target Name="SimpleDictionaryTest:Clean">
-    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="Clean" />
-  </Target>
-  <Target Name="SimpleDictionaryTest:Make">
-    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="Make" />
-  </Target>
   <Target Name="StressTest">
     <MSBuild Projects="tests\Playground\StressTest.dproj" Targets="" />
   </Target>
@@ -28,13 +19,22 @@
   <Target Name="StressTest:Make">
     <MSBuild Projects="tests\Playground\StressTest.dproj" Targets="Make" />
   </Target>
+  <Target Name="SimpleDictionaryTest">
+    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="" />
+  </Target>
+  <Target Name="SimpleDictionaryTest:Clean">
+    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SimpleDictionaryTest:Make">
+    <MSBuild Projects="tests\SimpleDictionaryTest.dproj" Targets="Make" />
+  </Target>
   <Target Name="Build">
-    <CallTarget Targets="SimpleDictionaryTest;StressTest" />
+    <CallTarget Targets="StressTest;SimpleDictionaryTest" />
   </Target>
   <Target Name="Clean">
-    <CallTarget Targets="SimpleDictionaryTest:Clean;StressTest:Clean" />
+    <CallTarget Targets="StressTest:Clean;SimpleDictionaryTest:Clean" />
   </Target>
   <Target Name="Make">
-    <CallTarget Targets="SimpleDictionaryTest:Make;StressTest:Make" />
+    <CallTarget Targets="StressTest:Make;SimpleDictionaryTest:Make" />
   </Target>
 </Project>

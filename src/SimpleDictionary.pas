@@ -18,6 +18,11 @@ uses
 type
   ISimpleDictionary = interface
     ['{63599D0E-F18C-42A3-930B-5788155C4671}']
+    procedure Clear;
+    procedure Delete(const Index: Integer); overload;
+    procedure Delete(const Key: Variant); overload;
+    function IndexOf(const Key: Variant): Integer;
+    function Contains(const Key: Variant): Boolean;
   end;
 
   TSimpleDictionaryBase = class(TInterfacedObject, ISimpleDictionary)
@@ -31,6 +36,7 @@ type
     function IndexOf(const Key: Variant): Integer; virtual; abstract;
   public
     destructor Destroy(); override;
+    function Contains(const Key: Variant): Boolean; 
   end;
 
 
@@ -88,7 +94,6 @@ type
     procedure Delete(const Key: Variant); overload; override;
 
     function IndexOf(const Key: Variant): Integer; override;
-    function Contains(const Key: Variant): Boolean;
     property Items: TObjectArray read FItems;
     property Count: Integer read GetCount;
     property Keys[const Index: Integer]: Variant read GetKey;
@@ -258,11 +263,6 @@ begin
   FillChar(FItems, SizeOf(FItems), 0);
 end;
 
-function TSimpleObjectDictionary.Contains(const Key: Variant): Boolean;
-begin
-  Result := IndexOf(Key) > -1;
-end;
-
 constructor TSimpleObjectDictionary.Create;
 begin
   Self.Clear();
@@ -349,6 +349,11 @@ begin
 end;
 
 { TSimpleDictionaryBase }
+
+function TSimpleDictionaryBase.Contains(const Key: Variant): Boolean;
+begin
+  Result := IndexOf(Key) > -1;
+end;
 
 destructor TSimpleDictionaryBase.Destroy;
 begin

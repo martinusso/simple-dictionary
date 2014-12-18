@@ -18,6 +18,7 @@ type
     procedure TestClear;
     procedure TestAdd;
     procedure TestAppend;
+    procedure TestContains;
     procedure TestDelete;
     procedure TestDelete1;
     procedure TestIndexOf;
@@ -49,6 +50,13 @@ begin
   CheckEquals(2, FSimpleDictionary.Count);
   FSimpleDictionary.Clear;
   CheckEquals(0, FSimpleDictionary.Count);
+end;
+
+procedure TestTSimpleDictionary.TestContains;
+begin
+  FSimpleDictionary.Append(1, 'Simple');
+  FSimpleDictionary.Append(2, 'Dictionary');
+  CheckTrue(FSimpleDictionary.Contains(1));
 end;
 
 procedure TestTSimpleDictionary.TestAdd;

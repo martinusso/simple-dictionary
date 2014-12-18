@@ -17,6 +17,7 @@ uses
 {$R *.RES}
 
 begin
+ 
   Application.Initialize;
   if IsConsole then
     TextTestRunner.RunRegisteredTests

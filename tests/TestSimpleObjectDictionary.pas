@@ -25,6 +25,7 @@ type
     procedure TestClear;
     procedure TestAdd;
     procedure TestAppend;
+    procedure TestContains;
     procedure TestDelete;
     procedure TestDelete1;
     procedure TestIndexOf;
@@ -69,6 +70,13 @@ begin
   CheckEquals(2, FObjectDictionary.Count);
   FObjectDictionary.Clear;
   CheckEquals(0, FObjectDictionary.Count);
+end;
+
+procedure TestTSimpleObjectDictionary.TestContains;
+begin
+  FObjectDictionary.Append(1, nil);
+  FObjectDictionary.Append(2, nil);
+  CheckTrue(FObjectDictionary.Contains(2));
 end;
 
 procedure TestTSimpleObjectDictionary.TestAdd;
