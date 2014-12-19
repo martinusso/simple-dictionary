@@ -9,8 +9,8 @@ uses
   TestFramework,
   GUITestRunner,
   TextTestRunner,
-  TestFloatDictionary in 'TestFloatDictionary.pas',
   SimpleDictionary in '..\src\SimpleDictionary.pas',
+  TestFloatDictionary in 'TestFloatDictionary.pas',
   TestSimpleDictionary in 'TestSimpleDictionary.pas',
   TestSimpleObjectDictionary in 'TestSimpleObjectDictionary.pas';
 
