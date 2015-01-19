@@ -16,13 +16,7 @@ uses
   Classes, Variants;
 
 type
-  ISimpleDictionary = interface
-    ['{63599D0E-F18C-42A3-930B-5788155C4671}']
-    function Contains(const Key: Variant): Boolean;
-    function IndexOf(const Key: Variant): Integer;
-  end;
-
-  TSimpleDictionaryBase = class(TInterfacedObject, ISimpleDictionary)
+  TSimpleDictionaryBase = class(TObject)
   private
     procedure Error(const Msg: string; Data: Integer);
   protected
