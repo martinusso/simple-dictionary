@@ -1,3 +1,8 @@
+---
+layout: default
+title: Using dictionary in Delphi without generics.
+---
+
 # TSimpleDictionary
 
 Using dictionary in Delphi without generics.
